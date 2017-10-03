@@ -44,6 +44,6 @@ void	draw_object(t_env *e)
 	e->img.img_ptr = mlx_new_image(e->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
 	e->img.img_data = (unsigned char *)mlx_get_data_addr(e->img.img_ptr,
 		&e->img.img_bpp, &e->img.l_size, &e->img.img_end);
-	connect_coord(e);
+	//connect_coord(e);
 	mlx_put_image_to_window(e->mlx_ptr, e->mlx_window, e->img.img_ptr, 0, 0);
 }

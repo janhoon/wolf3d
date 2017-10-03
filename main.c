@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: janhoon <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: janhoon <janhoon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 14:37:50 by janhoon           #+#    #+#             */
-/*   Updated: 2017/09/20 14:37:52 by janhoon          ###   ########.fr       */
+/*   Updated: 2017/10/03 11:05:03 by janhoon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,20 +45,16 @@ int		main(int argc, char **argv)
 
 	if (argc == 2)
 	{
-		if (load_coords(argv[1], &env.obj))
+		if (init_mlx(&env))
 		{
-			env.obj.scale.x = (WINDOW_WIDTH - 2 * MARGIN) / (env.obj.col - 1);
-			env.obj.scale.y = (WINDOW_HEIGHT - 2 * MARGIN) / (env.obj.rows - 1);
-			init_coords(&env.obj);
-			if (init_mlx(&env))
-			{
-				mlx_run(&env);
-			}
+			ft_putstr(argv[1]);
+			init_wolf(&env);
+			mlx_run(&env);
 		}
 	}
 	else
 	{
-		ft_putstr("Incorect arguments! Please use \'./fdf path/to/map\'\n");
+		ft_putstr("Incorect arguments! Please use \'./wolf3d path/to/map\'\n");
 	}
 	return (1);
 }

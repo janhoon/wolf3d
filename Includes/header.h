@@ -13,8 +13,8 @@
 #ifndef HEADER_H
 # define HEADER_H
 
-# define WINDOW_WIDTH 1600
-# define WINDOW_HEIGHT 900
+# define WINDOW_WIDTH 1280
+# define WINDOW_HEIGHT 720
 # define MARGIN 200
 
 # include <stdio.h>
@@ -44,6 +44,12 @@ typedef struct		s_vec3
 	int				color;
 }					t_vec3;
 
+typedef struct		s_vec2
+{
+	double			x;
+	double			y;
+}					t_vec2;
+
 typedef struct		s_obj
 {
 	t_vec3			**coords;
@@ -64,12 +70,22 @@ typedef struct		s_mlx_img
 	int				local_end;
 }					t_mlx_img;
 
+typedef struct		s_wolf
+{
+	t_vec2			pos;
+	t_vec2			dir;
+	t_vec2			plane;
+	double			time;
+	double			oldTime;
+}					t_wolf;
+
 typedef struct		s_env
 {
 	void			*mlx_ptr;
 	void			*mlx_window;
 	t_mlx_img		img;
 	t_obj			obj;
+	t_wolf			wolf;
 }					t_env;
 
 int					key_win(int key, t_env *e);

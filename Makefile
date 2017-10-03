@@ -1,7 +1,7 @@
 MAKEFLAGS += --silent
 CC=gcc
 CFLAGS=-Wall -Werror -Wextra -g3 -O3
-NAME=fdf
+NAME=wolf3d
 LIBFT= -I Includes -I libft -L libft -lft
 SOURCES=main.c\
 		Sources/hooks.c\
@@ -9,7 +9,8 @@ SOURCES=main.c\
 		Sources/draw.c\
 		Sources/rotation.c\
 		Sources/init_coords.c\
-		Sources/draw_line.c
+		Sources/draw_line.c\
+		Sources/wolf.c
 
 $(NAME): all
 
