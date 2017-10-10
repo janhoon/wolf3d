@@ -1,37 +1,50 @@
-MAKEFLAGS += --silent
-CC=gcc
-CFLAGS=-Wall -Werror -Wextra -g3 -O3
-NAME=wolf3d
-LIBFT= -I Includes -I libft -L libft -lft
-SOURCES=main.c\
-		Sources/hooks.c\
-		Sources/map_loader.c\
-		Sources/draw.c\
-		Sources/rotation.c\
-		Sources/init_coords.c\
-		Sources/draw_line.c\
-		Sources/wolf.c
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: janhoon <janhoon@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2017/10/10 10:38:35 by janhoon           #+#    #+#              #
+#    Updated: 2017/10/10 10:39:51 by janhoon          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-$(NAME): all
+NAME	= wolf3d
 
-all :
-	cd libft; make all
-	echo "Libft Compiled"
-	$(CC) $(CFLAGS) $(SOURCES) $(LIBFT) -lmlx -framework OpenGL -framework AppKit -o $(NAME) -lm
-	echo "FdF Compiled"
+SRC		= src/main.c \
+		  src/error.c \
+		  src/draw.c \
+		  src/init.c \
+		  src/loop.c \
+		  src/ray.c \
+		  src/read.c \
+		  src/key.c \
+		  src/move.c
 
-linux :
-	cd libft; make all
-	echo "Libft Compiled"
-	$(CC) $(CFLAGS) $(SOURCES) $(LIBFT) $(shell pkg-config --libs --static mlx) -o $(NAME) -lm
-	echo "FdF Compiled"
+OBJ		= $(patsubst src/%.c,obj/%.o,$(SRC))
+.SILENT:
 
-clean :
-	cd libft; make clean
+all: $(NAME)
 
-fclean : clean
-	cd libft; make fclean
-	rm $(NAME)
-	echo "All build files have been removed"
+$(NAME): $(OBJ)
+	make -C libft/
+	gcc -Wall -Wextra -Werror -L libft/ -lft -L/usr/local/lib -lmlx -framework OpenGL -framework AppKit $(SRC) -o $(NAME)
+	echo "$(NAME) has been compiled"
 
-re : fclean all
+obj/%.o: src/%.c
+	mkdir -p obj
+	gcc -Wall -Wextra -Werror -c $< -o $@
+
+clean:
+	/bin/rm -rf obj/
+	make -C libft/ clean
+
+fclean: clean
+	/bin/rm -f $(NAME)
+	make -C libft/ fclean
+
+re: fclean all
+
+all: $(NAME)
+.PHONY: clean fclean re all

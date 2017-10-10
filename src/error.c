@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wolf.c                                             :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: janhoon <janhoon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/03 10:59:53 by janhoon           #+#    #+#             */
-/*   Updated: 2017/10/03 11:02:57 by janhoon          ###   ########.fr       */
+/*   Created: 2017/10/10 10:38:13 by janhoon           #+#    #+#             */
+/*   Updated: 2017/10/10 11:38:26 by janhoon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "../include/wolf.h"
 
-void	init_wolf(t_env *e)
+void	error_malloc(void)
 {
-	e->wolf.pos.x = 22
-	e->wolf.pos.y = 12;
-	e->wolf.dir.x = -1
-	e->wolf.dir.y = 0;
-	e->wolf.plane.x = 0
-	e->wolf.plane.y = 0.66;
+	write(1, "error malloc\n", 13);
+	exit(1);
+}
 
-	e->wolf.time = 0;
-	e->wold.oldTime = 0;
+void	error_arg(void)
+{
+	ft_putstr("Incorrect Arguments: Use \'./wolf3d path/to/map\'\n");
+	exit(1);
+}
+
+void	error_map(void)
+{
+	ft_putstr("Error processing map\n");
+	exit(1);
 }
